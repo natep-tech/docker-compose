@@ -6,10 +6,22 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t 
     volumes:
-      - /home/inatie/twitch/analytics:/usr/src/app/analytics
-      - /home/inatie/twitch/cookies:/usr/src/app/cookies
-      - /home/inatie/twitch/logs:/usr/src/app/logs
-      - /home/inatie/twitch/run.py:/usr/src/app/run.py
+      - type: bind
+        source: /home/inatie/twitch/analytics
+        target: /usr/src/app/analytics
+        read_only: false
+      - type: bind
+        source: /home/inatie/twitch/cookies
+        target: /usr/src/app/cookies
+        read_only: false
+      - type: bind
+        source: /home/inatie/twitch/logs
+        target: /usr/src/app/logs
+        read_only: false
+      - type: bind
+        source: /home/inatie/twitch/run.py
+        target: /usr/src/app/run.py
+        read_only: false
   deploy:
     mode: replicated
     replicas: 1
