@@ -1,0 +1,16 @@
+services:
+  twitch:
+    image: rdavidoff/twitch-channel-points-miner-v2
+    ports:
+      - "5000:5000"   
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t 
+    volumes:
+      - /home/inatie/twitch/analytics:/usr/src/app/analytics
+      - /home/inatie/twitch/cookies:/usr/src/app/cookies
+      - /home/inatie/twitch/logs:/usr/src/app/logs
+      - /home/inatie/twitch/run.py:/usr/src/app/run.py
+  deploy:
+    mode: replicated
+    replicas: 1
+      
